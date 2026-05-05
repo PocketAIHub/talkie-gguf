@@ -1,0 +1,28 @@
+# Huge model artifacts — never commit
+weights/
+out/
+
+# llama.cpp build outputs
+llama.cpp/build/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Regeneratable validation artifacts
+validation/_tmp*.json
+validation/gguf_logits*.json
+validation/comparison_report.txt
+
+# Stale top-level scratch outputs
+/talkie_logits.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp

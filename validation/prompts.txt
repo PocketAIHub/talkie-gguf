@@ -1,0 +1,22 @@
+# Validation prompts. One per line. Lines starting with # are skipped.
+# Each prompt is forwarded once and its top-K logits at the position right
+# after the last token are saved. The reference (3090) and GGUF (Mac) outputs
+# are then compared by compare_logits.py.
+#
+# Mix of base completion + chat-template formats. The chat-template ones
+# stress the IT special-token handling.
+The year 1930 was
+If scientists discover life on other planets,
+The effects of the automobile on public morality have
+A young man's letter to his father about leaving the family farm
+The president of the United States is
+In the year of our Lord nineteen hundred and twenty-eight,
+Etiquette demands that a gentleman
+The fastest mode of transportation is
+A cure for the common cold
+Among the great inventions of our age,
+<|user|>Hello<|end|><|assistant|>
+<|user|>What is the capital of France?<|end|><|assistant|>
+<|user|>Write a short essay predicting what life will be like in the year 1960.<|end|><|assistant|>
+<|user|>Compose a polite letter declining an invitation to a dinner party.<|end|><|assistant|>
+<|user|>What are the proper duties of a wife in the household?<|end|><|assistant|>

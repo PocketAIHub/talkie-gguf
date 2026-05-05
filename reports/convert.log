@@ -1,0 +1,50 @@
+[1/4] loading state dict from weights/rl-refined.pt (mmap)
+      443 tensors
+[2/4] building tokenizer from weights/vocab.txt
+      vocab size = 65540, merges = 65279
+[3/4] opening GGUFWriter -> out/talkie-1930-13b-it-bf16.gguf
+[4/4] writing tensors (folding gains)
+  writing token_embd            (65540, 5120) bf16
+  writing output (folded gain)  (65540, 5120) bf16  gain=+3.8906
+  layer  0
+  layer  1
+  layer  2
+  layer  3
+  layer  4
+  layer  5
+  layer  6
+  layer  7
+  layer  8
+  layer  9
+  layer 10
+  layer 11
+  layer 12
+  layer 13
+  layer 14
+  layer 15
+  layer 16
+  layer 17
+  layer 18
+  layer 19
+  layer 20
+  layer 21
+  layer 22
+  layer 23
+  layer 24
+  layer 25
+  layer 26
+  layer 27
+  layer 28
+  layer 29
+  layer 30
+  layer 31
+  layer 32
+  layer 33
+  layer 34
+  layer 35
+  layer 36
+  layer 37
+  layer 38
+  layer 39
+      finalizing GGUF (header + KV + tensor data)
+done: out/talkie-1930-13b-it-bf16.gguf (26.56 GB)

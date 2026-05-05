@@ -1,0 +1,2 @@
+# Single 9-token NaN-trigger prompt for fast partial-offload bisect.
+The effects of the automobile on public morality have

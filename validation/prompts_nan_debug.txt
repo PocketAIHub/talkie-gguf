@@ -1,0 +1,7 @@
+# Focused NaN bisect: one prompt at each boundary.
+# 6 tokens — must be clean.
+The year 1930 was
+# 8 tokens — must be clean (last known-good size).
+If scientists discover life on other planets,
+# 9 tokens — first known-bad size.
+The effects of the automobile on public morality have

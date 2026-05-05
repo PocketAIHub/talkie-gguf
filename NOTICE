@@ -1,0 +1,23 @@
+talkie-gguf
+Copyright 2026 PocketAI
+
+This product is a derivative work of "talkie-1930-13b-it" by talkie-lm
+(https://huggingface.co/talkie-lm/talkie-1930-13b-it,
+ https://github.com/talkie-lm/talkie), used under the Apache License 2.0.
+
+Modifications by PocketAI:
+  - Added llama.cpp `LLM_ARCH_TALKIE` architecture and graph builder
+    (`llama.cpp/src/models/talkie.cpp`).
+  - PyTorch checkpoint → GGUF converter (`scripts/convert_to_gguf.py`)
+    that folds talkie's gain scalars into adjacent linear weights and
+    stores per-layer scalars (`embed_skip_scale`, `attn_q_gain`).
+  - Reference-logits validation tooling under `validation/`.
+  - Metal backend env var (`GGML_METAL_NE11_MM_MIN`) in
+    `llama.cpp/ggml/src/ggml-metal/ggml-metal-ops.cpp` to bypass the
+    fp16-storage MUL_MAT path for models with high-magnitude activations.
+
+This product also bundles a fork of llama.cpp (https://github.com/ggml-org/llama.cpp)
+forked at upstream commit d775992. llama.cpp is distributed under the MIT
+License — see `llama.cpp/LICENSE` for its terms. The MIT license applies to
+all files under `llama.cpp/` (including PocketAI's modifications above, which
+inherit MIT). Files outside `llama.cpp/` are licensed under Apache 2.0.
