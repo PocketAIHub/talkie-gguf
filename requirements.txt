@@ -1,0 +1,5 @@
+torch
+huggingface_hub
+gguf
+tiktoken
+transformers<5  # bytes_to_unicode was removed from transformers.models.gpt2 in 5.x

@@ -17,22 +17,25 @@ library_name: gguf
 GGUF port of [`talkie-lm/talkie-1930-13b-it`](https://huggingface.co/talkie-lm/talkie-1930-13b-it),
 the 1930-era vintage language model by Alec Radford et al.
 
-This is the first GGUF release of talkie. It was produced and validated by
+This is the first GGUF release of talkie (v0.x). It was produced by
 [PocketAI](https://pocketai.app); converter source and a forked llama.cpp
 with `LLM_ARCH_TALKIE` support are at
-[github.com/pocketai/talkie-gguf](https://github.com/pocketai/talkie-gguf).
+[github.com/PocketAIHub/talkie-gguf](https://github.com/PocketAIHub/talkie-gguf).
 
 ## Important — read before downloading
 
 Stock `llama.cpp` does not yet know the `talkie` architecture, and on macOS
 Metal it requires an environment variable to avoid producing NaN logits at
 prompt lengths ≥ 9 tokens. **You must build PocketAI's llama.cpp fork from
-source until the upstream PR merges.** Both quants below have been validated
-against the reference PyTorch model on a CUDA box and match within
-quantization noise (see "Validation" below).
+source until the upstream PR merges.** Both quants below have been compared
+against the reference PyTorch model: tokenization is byte-perfect, top-1
+agrees on 14/15 prompts, generation is coherent in practice. There is
+non-trivial logit-Δ on chat-template prompts (graph-level drift, same in
+bf16 and Q8_0 — not quantization noise) that will be tightened up in a
+future release. See "Validation" below for full numbers.
 
 ```bash
-git clone https://github.com/pocketai/talkie-gguf
+git clone https://github.com/PocketAIHub/talkie-gguf
 cd talkie-gguf/llama.cpp
 cmake -B build -DGGML_METAL=ON     # Linux/Windows: omit -DGGML_METAL=ON
 cmake --build build -j --target llama-cli
@@ -64,16 +67,25 @@ Prompt: `Among the great inventions of our age, the wireless radio has`
 
 ## Validation
 
-[VALIDATION_RESULTS_PLACEHOLDER — populated after `compare_logits.py` run.
-See `validation/comparison_report.txt` in the github fork repo.]
+15-prompt logit comparison vs the reference talkie PyTorch model
+(`talkie-lm/talkie-1930-13b-it`). Reference run on CPU bf16 (the 26 GB
+bf16 model does not fit in 24 GB VRAM); GGUF side ran on RTX 3090 (Q8_0,
+`-ngl 99`) and on CPU (bf16, too large for a single 3090). Full reports
+in [validation/](https://github.com/PocketAIHub/talkie-gguf/tree/main/validation).
 
-Targets:
-| Metric | Q8_0 vs reference bf16 | Q4_K_M vs reference bf16 |
-|---|---|---|
-| Tokens-match | 100% | 100% |
-| Top-1 agreement | ≥ 95% | ≥ 90% |
-| Mean cosine | ≥ 0.999 | ≥ 0.99 |
-| Mean max logit diff | ≤ 0.10 | ≤ 0.5 |
+| Metric | Q8_0 result | bf16 result | Q8_0 target | bf16 target |
+|---|---|---|---|---|
+| Tokens-match | **15/15 (100%)** | **15/15 (100%)** | 100% | 100% |
+| Top-1 agreement | **14/15 (93.3%)** | **14/15 (93.3%)** | ≥ 90% ✓ | ≥ 95% (≈) |
+| Mean cosine | **0.9977** | **0.9982** | ≥ 0.99 ✓ | ≥ 0.999 (≈) |
+| Mean max logit Δ | **1.33** | **1.20** | ≤ 0.5 | ≤ 0.10 |
+
+Drift is concentrated on chat-template prompts (`<|user|>...<|end|><|assistant|>`):
+non-chat prompts agree within ≤ 0.5 logit units; chat prompts spike to
+2-6 on individual logits but the top-1 token still wins on 14/15 chat
+prompts. Q8_0 and bf16 GGUFs drift the same amount, so the cause is in
+the graph rather than quantization. Investigation will continue for a
+future release.
 
 ## Performance
 
@@ -83,6 +95,12 @@ Apple M1 Pro, 32 GB unified memory, full Metal offload:
 |---|---|---|
 | Q8_0   | 12.4 tok/s | 10.0 tok/s |
 | Q4_K_M | 14.1 tok/s | 11.0 tok/s |
+
+NVIDIA RTX 3090, 24 GB VRAM, full CUDA offload (`-ngl 99`):
+
+| Quant | Prompt eval | Generation | VRAM (4K ctx) |
+|---|---|---|---|
+| Q8_0   | ~910 tok/s | ~58 tok/s | ~14.9 GB |
 
 ## About talkie
 

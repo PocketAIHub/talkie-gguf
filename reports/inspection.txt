@@ -1,4 +1,4 @@
-checkpoint: /Users/trevorwood/Desktop/gitrepo/talkie-gguf/weights/rl-refined.pt
+checkpoint: C:\Users\frogg\OneDrive\Desktop\gitrepo\talkie-gguf\weights\rl-refined.pt
 top-level keys: 443
 
 ==============================================================================

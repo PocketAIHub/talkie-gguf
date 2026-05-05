@@ -1,0 +1,119 @@
+reference model : talkie-1930-13b-it
+gguf model      : out\talkie-1930-13b-it-Q8_0.gguf
+prompts compared: 15 / ref=15 gguf=15
+
+--- prompt  0: The year 1930 was
+    tokens-match : yes
+    top1 ref     : id=   258 logit=+15.375
+    top1 gguf    : id=   258 logit=+15.443 MATCH
+    overlap      : jaccard=0.923  cos=1.0000  rank=1
+    logit diff   : max=+0.153  mean=+0.054
+
+--- prompt  1: If scientists discover life on other planets,
+    tokens-match : yes
+    top1 ref     : id=   510 logit=+14.875
+    top1 gguf    : id=   510 logit=+14.897 MATCH
+    overlap      : jaccard=0.961  cos=1.0000  rank=1
+    logit diff   : max=+0.116  mean=+0.045
+
+--- prompt  2: The effects of the automobile on public morality have
+    tokens-match : yes
+    top1 ref     : id=   498 logit=+18.750
+    top1 gguf    : id=   498 logit=+18.755 MATCH
+    overlap      : jaccard=0.961  cos=1.0000  rank=1
+    logit diff   : max=+0.188  mean=+0.066
+
+--- prompt  3: A young man's letter to his father about leaving the fami...
+    tokens-match : yes
+    top1 ref     : id=   290 logit=+16.125
+    top1 gguf    : id=   290 logit=+16.273 MATCH
+    overlap      : jaccard=1.000  cos=1.0000  rank=1
+    logit diff   : max=+0.323  mean=+0.076
+
+--- prompt  4: The president of the United States is
+    tokens-match : yes
+    top1 ref     : id=  4189 logit=+13.000
+    top1 gguf    : id=  4189 logit=+13.032 MATCH
+    overlap      : jaccard=1.000  cos=0.9999  rank=1
+    logit diff   : max=+0.414  mean=+0.110
+
+--- prompt  5: In the year of our Lord nineteen hundred and twenty-eight,
+    tokens-match : yes
+    top1 ref     : id= 65536 logit=+14.875
+    top1 gguf    : id= 65536 logit=+15.078 MATCH
+    overlap      : jaccard=0.923  cos=0.9999  rank=1
+    logit diff   : max=+0.364  mean=+0.121
+
+--- prompt  6: Etiquette demands that a gentleman
+    tokens-match : yes
+    top1 ref     : id=   775 logit=+15.875
+    top1 gguf    : id=   775 logit=+15.936 MATCH
+    overlap      : jaccard=0.887  cos=1.0000  rank=1
+    logit diff   : max=+0.369  mean=+0.087
+
+--- prompt  7: The fastest mode of transportation is
+    tokens-match : yes
+    top1 ref     : id=   363 logit=+17.000
+    top1 gguf    : id=   363 logit=+17.033 MATCH
+    overlap      : jaccard=0.961  cos=1.0000  rank=1
+    logit diff   : max=+0.312  mean=+0.091
+
+--- prompt  8: A cure for the common cold
+    tokens-match : yes
+    top1 ref     : id=   327 logit=+13.812
+    top1 gguf    : id=   327 logit=+13.832 MATCH
+    overlap      : jaccard=0.923  cos=0.9999  rank=1
+    logit diff   : max=+0.356  mean=+0.090
+
+--- prompt  9: Among the great inventions of our age,
+    tokens-match : yes
+    top1 ref     : id=  1236 logit=+13.188
+    top1 gguf    : id=  1236 logit=+13.152 MATCH
+    overlap      : jaccard=0.961  cos=1.0000  rank=1
+    logit diff   : max=+0.158  mean=+0.064
+
+--- prompt 10: <|user|>Hello<|end|><|assistant|>
+    tokens-match : yes
+    top1 ref     : id= 21143 logit=+16.625
+    top1 gguf    : id= 21143 logit=+16.573 MATCH
+    overlap      : jaccard=0.613  cos=0.9955  rank=1
+    logit diff   : max=+2.140  mean=+0.919
+
+--- prompt 11: <|user|>What is the capital of France?<|end|><|assistant|>
+    tokens-match : yes
+    top1 ref     : id=   486 logit=+23.750
+    top1 gguf    : id=   486 logit=+23.971 MATCH
+    overlap      : jaccard=0.754  cos=0.9968  rank=1
+    logit diff   : max=+2.549  mean=+0.740
+
+--- prompt 12: <|user|>Write a short essay predicting what life will be ...
+    tokens-match : yes
+    top1 ref     : id=  1028 logit=+21.125
+    top1 gguf    : id=  1028 logit=+21.118 MATCH
+    overlap      : jaccard=0.515  cos=0.9944  rank=1
+    logit diff   : max=+3.686  mean=+0.958
+
+--- prompt 13: <|user|>Compose a polite letter declining an invitation t...
+    tokens-match : yes
+    top1 ref     : id=  7334 logit=+17.375
+    top1 gguf    : id=  7334 logit=+14.558 MATCH
+    overlap      : jaccard=0.449  cos=0.9808  rank=1
+    logit diff   : max=+5.982  mean=+2.358
+
+--- prompt 14: <|user|>What are the proper duties of a wife in the house...
+    tokens-match : yes
+    top1 ref     : id=    65 logit=+22.750
+    top1 gguf    : id=   486 logit=+22.614 MISS
+    overlap      : jaccard=0.639  cos=0.9986  rank=2
+    logit diff   : max=+2.858  mean=+0.436
+
+============================================================
+SUMMARY
+============================================================
+  tokens-match        : 15/15 (100.0%)
+  top1-match          : 14/15 (93.3%)
+  mean jaccard top-K  : 0.831
+  mean cosine sim     : 0.9977
+  mean GGUF-top1 rank : 1.07
+  mean max logit diff : 1.331
+  mean mean logit diff: 0.414

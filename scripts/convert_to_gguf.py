@@ -31,7 +31,7 @@ HEAD_DIM = 128           # n_embd / n_head
 N_FF = 13696             # round((8/3) * 5120 / 128) * 128
 N_CTX_TRAIN = 2048
 ROPE_FREQ_BASE = 1_000_000.0
-RMS_NORM_EPS = 1e-6      # F.rms_norm default
+RMS_NORM_EPS = 1.1920928955078125e-07   # torch.finfo(float32).eps — actual F.rms_norm default
 
 BASE_VOCAB_SIZE = 65536
 IT_VOCAB_SIZE = BASE_VOCAB_SIZE + 4   # +4 specials for IT
@@ -67,6 +67,7 @@ def load_state_dict(ckpt_path: Path) -> dict[str, torch.Tensor]:
 # --------------------------------------------------------------------------- #
 def _bytes_to_unicode_string(b: bytes) -> str:
     """GPT-2 bytes-to-unicode encoding so the bytes survive UTF-8 storage in GGUF."""
+    # Requires transformers<5; bytes_to_unicode was removed from this submodule in 5.x.
     from transformers.models.gpt2.tokenization_gpt2 import bytes_to_unicode  # type: ignore
     byte_encoder = bytes_to_unicode()
     return "".join(byte_encoder[c] for c in b)
