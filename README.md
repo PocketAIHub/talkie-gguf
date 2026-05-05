@@ -2,7 +2,7 @@
 
 GGUF port of [`talkie-lm/talkie-1930-13b-it`](https://huggingface.co/talkie-lm/talkie-1930-13b-it),
 distributed by **PocketAI** as
-[`pocketai/talkie-1930-13b-it-GGUF`](https://huggingface.co/pocketai/talkie-1930-13b-it-GGUF).
+[`PocketAiHub/talkie-1930-13b-it-GGUF`](https://huggingface.co/PocketAiHub/talkie-1930-13b-it-GGUF).
 
 This repository is the converter source and a forked llama.cpp containing the
 `talkie` architecture support. It exists primarily so the GGUF on Hugging Face
@@ -75,6 +75,34 @@ cmake -B build -G "Visual Studio 17 2022" -A x64 `
 CUDA 13.x relocated its runtime DLLs from `bin\` to `bin\x64\`. Make sure
 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.X\bin\x64` is on
 `PATH` at run time, otherwise `cublas64_13.dll` won't resolve.
+
+## Download
+
+Pre-built GGUFs live at
+[`PocketAiHub/talkie-1930-13b-it-GGUF`](https://huggingface.co/PocketAiHub/talkie-1930-13b-it-GGUF):
+
+| File | Quant | Size | Bits/weight | Recommended |
+|---|---|---|---|---|
+| `talkie-1930-13b-it-Q4_K_M.gguf` | Q4_K_M | 8.0 GB  | 5.16 | Best size/quality tradeoff |
+| `talkie-1930-13b-it-Q8_0.gguf`   | Q8_0   | 13.1 GB | 8.50 | Closest to reference |
+
+Pull via the Hugging Face CLI:
+
+```bash
+pip install huggingface_hub
+hf download PocketAiHub/talkie-1930-13b-it-GGUF \
+  talkie-1930-13b-it-Q8_0.gguf --local-dir ./out
+```
+
+Or fetch the direct URL:
+
+```bash
+wget -O out/talkie-1930-13b-it-Q8_0.gguf \
+  https://huggingface.co/PocketAiHub/talkie-1930-13b-it-GGUF/resolve/main/talkie-1930-13b-it-Q8_0.gguf
+```
+
+You can use these GGUFs **only** with this repo's llama.cpp fork — stock
+llama.cpp does not yet recognize the `talkie` architecture (see [Build](#build)).
 
 ## Run
 
